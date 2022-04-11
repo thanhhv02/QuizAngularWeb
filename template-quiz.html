@@ -1,0 +1,127 @@
+<div class="container my-5" id="content">
+    <div class="row" >
+        <div class="col text-center" ng-show="!inProgess">
+            <button class="btn btn-primary" ng-click="start()">Start the Quiz</button>
+        </div>
+    </div>
+     <style>
+         .disableContent{
+            pointer-events:none;
+         }
+     </style>
+    <div ng-show="inProgess">
+        <div class="row" >
+        
+            <div class="col text-center" ng-show="quizOver">
+                <h1 class="h1">Quiz is Over</h1>
+                <h2>Đúng: {{score}}/{{sizeQs}}</h2>
+                <h3>Sai: {{wrongAns}}</h3>
+                <h3>Còn lại chưa làm:{{sizeQs-(score+wrongAns)}}</h3>
+                <button class="btn btn-primary" ng-click="reset()">Wanna test again ?</button>
+            </div>
+        </div>
+        <div ng-show="!quizOver">
+            <div class="row">
+                <!-- <div class="col text-center">
+                    <h2><i class="fas fa-clock" style="color: #23B5E1;"></i> 10:12:00</h2>
+                </div> -->
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="card border-info">
+                        <div class="card-header text-white" style="background-color: #23B5E1;">
+                            <img src="images/logos/JAAV.png" width="30" class="border border-primary rounded-lg" alt="">
+                            <span>{{subjectName}}</span>
+                            <span class="float-right badge badge-dark" style="padding: .28em .7em;">{{id+1}}/{{sizeQs}}</span>
+                        </div>
+                        <div class="" style="height: 300px;" ng-class="answerMode?'card-body':'card-body disableContent'" >
+                            <div class="card-text" style="font-weight: 500;">
+                                <label for="" class="h4">{{question}}</label>
+                                <hr>
+                                <div class="form-check" ng-repeat = "op in options">
+                                    
+                                    <label class="form-check-label" for="Radios1">
+                                    <input class="form-check-input" type="radio" name="answer" value="{{op.Id}}">
+                                        {{op.Text}}
+                                    </label>
+                                </div>
+                            </div>
+                            <div ng-show = "!answerMode">
+                                <div class="alert alert-danger" role="alert">
+                                    Đã làm câu này
+                                  </div>                            
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="row">
+                                <div class="col-2">
+                                    <div ng-show = "answerMode">
+                                        <button class="btn btn-primary" ng-click="checkAnswer();">Submit</button>
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div >
+                                        <button class="btn btn-primary" ng-click="fisrtQues()">First</button>
+                                        <!-- <span ng-show="correctAnswer">Correct!</span>
+                                        <span ng-show="!correctAnswer">Incorrect!</span> -->
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div >
+                                        <button class="btn btn-primary" ng-disabled="id == 0" ng-click="previousQuestion()">Previous</button>
+                                        <!-- <span ng-show="correctAnswer">Correct!</span>
+                                        <span ng-show="!correctAnswer">Incorrect!</span> -->
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div >
+                                        <button class="btn btn-primary" ng-disabled="id == lastQuestion" ng-click="nextQuestion()">Next</button>
+                                        <!-- <span ng-show="correctAnswer">Correct!</span>
+                                        <span ng-show="!correctAnswer">Incorrect!</span> -->
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div >
+                                        <button class="btn btn-primary" ng-click="lastQues()">Last</button>
+                                        <!-- <span ng-show="correctAnswer">Correct!</span>
+                                        <span ng-show="!correctAnswer">Incorrect!</span> -->
+                                    </div>
+                                </div>
+                                
+                            </div>
+                           
+                           
+                            
+                            <span class="text-info"
+                                style="padding: .28em .7em; font-size: 90%; font-weight: 500;">Điểm:
+                                {{score}}/10
+                            </span>
+                           
+                            
+                        </div>
+                    </div>
+                    <div class="row border border-success">
+                        <div class="col-2 my-4 mx-4" ng-repeat = " q in QuesQuantity" style="width: 63px">
+                            <button class="btn btn-primary" 
+                            ng-class="$index == selectedIndex?'btn btn-warning':'btn btn-primary'" 
+                            ng-click="getQuestionFromList($index);itemClicked($index);"
+                            >{{$index + 1}}</button>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="col-2 mx-2">
+                        <div >
+                            <button class="btn btn-primary" ng-click="completeQuiz()">Hoàn thành</button>
+                            <!-- <span ng-show="correctAnswer">Correct!</span>
+                            <span ng-show="!correctAnswer">Incorrect!</span> -->
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+    
+    
+</div>
