@@ -35,6 +35,17 @@
     <link rel="stylesheet" href="./assets/css/style.css">
     <meta name="robots" content="noindex, follow">
   </head>
+  <script>
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId            : '1686737948346285',
+        autoLogAppEvents : true,
+        xfbml            : true,
+        version          : 'v13.0'
+      });
+    };
+  </script>
+  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
   <section class="sign-in mt-4" ng-app="myLogin" ng-controller="myctrl">
     <div class="container">
       <div class="signin-content">
@@ -83,7 +94,7 @@
             <ul class="socials">
               <li>
                 <a href="#">
-                  <i class="display-flex-center zmdi zmdi-facebook"></i>
+                  <i class="display-flex-center zmdi zmdi-facebook" ng-click="FBlogin()"></i>
                 </a>
               </li>
               <li>
@@ -140,6 +151,33 @@
           $window.location.href = "./index.html"
         }
       }
+      $scope.FBlogin = function(){
+          FB.login(function(response) {
+              if (response.authResponse) {
+               console.log('Welcome!  Fetching your information.... ');
+               FB.api('/me', function(response) {
+                 console.log('Good to see you, ' + response.name + '.');
+                 console.log(response);
+                 sessionStorage.setItem("userlogin", response.name);
+                $window.location.href = "./index.html"
+               });
+              } else {
+               console.log('User cancelled login or did not fully authorize.');
+              }
+          });
+      }
+      $scope.FBLogout = function(){
+        FB.getLoginStatus(function (response) {
+        if (response.authResponse) {
+          //  window.location = "https://www.facebook.com/logout.php?next=" +
+          //    'URL to redirect to' +
+          //    "&access_token=" + response.authResponse.accessToken;
+        } else {
+           $("#loginButtonDiv").show();
+           $("#logoutButtonDiv").hide();
+        }
+      });
+    }
     }
   </script>
   <!-- Mirrored from colorlib.com/etc/regform/colorlib-regform-7/ by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 19 Mar 2022 14:40:01 GMT -->

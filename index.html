@@ -33,6 +33,7 @@
 
     
     <script src="./assets/js/app.js"></script>
+    <script src="./assets/js/appScript.js"></script>
     <script data-require="angular-ui-bootstrap@0.3.0" 
                 data-semver="0.3.0" 
                 src=
@@ -42,14 +43,24 @@
 
 
   <body ng-app="myapp">
-
+    <script>
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId            : '1686737948346285',
+          autoLogAppEvents : true,
+          xfbml            : true,
+          version          : 'v13.0'
+        });
+      };
+    </script>
     <!-- ===============================================-->
     <!--    Main Content-->
     <!-- ===============================================-->
     <main class="main" id="top">
 
-      <nav class="navbar navbar-expand-lg navbar-light sticky-top" data-navbar-on-scroll="data-navbar-on-scroll"  >
-        <div class="container"><a class="navbar-brand" href="index.html"><img src="" height="31" alt="logo" /></a>
+      <nav class="navbar navbar-expand-lg navbar-light sticky-top" data-navbar-on-scroll="data-navbar-on-scroll" >
+        <div class="container"><a class="navbar-brand" href="index.html">
+          <img src="https://esquilo.io/png/thumb/GRqoSib7eDiGGTL-Quiz-Logo-PNG-HD.png" height="50px" width="" style="border-radius: 10px;" alt="logo" /></a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"> </span></button>
           <div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto fw-bold">
@@ -63,7 +74,9 @@
               <a class="btn btn-warning ms-3" href="./SignUp.html">Sign Up</a>
             </div>
             <div class="nav-item fw-bold" ng-show="nameLogin">|</div>
-              <div class="nav-item fw-bold"><a class="nav-link" aria-current="page" ng-show="nameLogin" href="">Hi, {{nameLogin}}</a></div>
+              <div class="nav-item fw-bold"><a class="nav-link" aria-current="page" ng-show="nameLogin" >{{nameLogin}}</a></div>
+            <div class="nav-item fw-bold" ng-show="nameLogin">|</div>
+              <div class="nav-item fw-bold"><a class="nav-link" aria-current="page" ng-show="nameLogin" ng-click="logout()" href="">Logout</a></div>
           </div>
         </div>
       </nav>
